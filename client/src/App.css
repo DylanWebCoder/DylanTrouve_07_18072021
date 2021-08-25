@@ -20,6 +20,13 @@ $color2 : #ffd7d7; */
 .banner img {
   width : 50%;
 }
+
+@media screen and (min-width: 550px){ 
+  .banner img{
+    width: 266.5px;
+  }
+  
+}
 /* -- NAVBAR -- */
 .navbar{
   width: 100%;

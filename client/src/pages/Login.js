@@ -22,6 +22,7 @@ function Login() {
             pseudo: response.data.pseudo,
             id: response.data.id,
             status: true,
+            isAdmin: response.data.isAdmin
           });
           history.push("/");
         }

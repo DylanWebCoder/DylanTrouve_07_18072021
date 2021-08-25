@@ -2,10 +2,10 @@ const Users = require("../models/Users");
 const Comments = require("../models/Comments");
 const Posts = require("../models/Posts");
 
-exports.createComment = (req, res) => {
+exports.createComment = async (req, res) => {
   const userId = req.user.id;
   const postId = req.body.PostId;
-  Comments.create({
+  await Comments.create({
     UserId: userId,
     PostId: postId,
     content: req.body.content

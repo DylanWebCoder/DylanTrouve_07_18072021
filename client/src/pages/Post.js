@@ -5,6 +5,7 @@ import { AuthContext } from "../helpers/AuthContext";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { GrAdd } from "react-icons/gr";
 import { RiDeleteBack2Fill } from "react-icons/ri";
+import swal from 'sweetalert';
 
 function Post() {
   let { id } = useParams();
@@ -66,7 +67,17 @@ function Post() {
   };
 
   const deletePost = (id) => {
-    axios
+
+    swal({
+      title: "Êtes-vous sûr ?",
+      text: "Vous allez supprimer définitivement ce post !",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        axios
       .delete(`http://localhost:5000/api/posts/${id}`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
@@ -75,6 +86,15 @@ function Post() {
       .then(() => {
         history.push("/");
       });
+        swal("Vous avez bien supprimer le post !", {
+          icon: "success",
+        });
+      } else {
+        swal("Vous n'avez pas supprimer le post");
+      }
+    });
+    
+    
   };
 
   const editPost = (option) => {
@@ -107,7 +127,7 @@ function Post() {
   };
 
 
-  if(!postObject || !postObject.User) 
+  if((!postObject || !postObject.User) && (!comments || !comments.User) ) 
   return null;
 
   return (

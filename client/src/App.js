@@ -40,7 +40,7 @@ function App() {
             pseudo: response.data.pseudo,
             id: response.data.id,
             status: true,
-            isAdmin: response.data.isAdmin
+            isAdmin: response.data.isAdmin,
           });
         }
       });
@@ -54,7 +54,6 @@ function App() {
       status: false,
       isAdmin: false
     });
-    history.push("/login");
   };
 
   return (
