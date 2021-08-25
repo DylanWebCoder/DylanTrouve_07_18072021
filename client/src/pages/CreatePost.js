@@ -50,9 +50,9 @@ function CreatePost() {
           <label>Contenu : </label>
           <ErrorMessage name="content" component="span" />
           <Field id="" name="content" placeholder="Contenu du post" />
-          <label>Image : </label>
-          <Field id="" name="image" placeholder="Image du post" type="file" />
-          <button type="submit">Créer le post</button>
+          {/*<label>Image : </label>
+          <Field id="" name="image" placeholder="Image du post" type="file" /> */}
+          <button className="btn-submit" type="submit">Créer le post</button>
         </Form>
       </Formik>
     </div>

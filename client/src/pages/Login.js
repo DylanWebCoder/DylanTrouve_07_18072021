@@ -22,7 +22,7 @@ function Login() {
             pseudo: response.data.pseudo,
             id: response.data.id,
             status: true,
-            isAdmin: response.data.isAdmin
+            isAdmin: response.data.isAdmin,
           });
           history.push("/");
         }
@@ -31,26 +31,28 @@ function Login() {
 
   return (
     <div className="login">
-      <h2>Connexion</h2>
-        <div className="group">
+      <div className="login-container">
+        <h2>Connexion</h2>
+        <div className="pseudo-container">
+          <label>Pseudo</label>
           <input
             type="text"
             onChange={(event) => {
               setPseudo(event.target.value);
             }}
           />
-          <label>Pseudo</label>
         </div>
-        <div className="group">
+        <div className="password-container">
+          <label>Mot de passe</label>
           <input
             type="password"
             onChange={(event) => {
               setPassword(event.target.value);
             }}
           />
-          <label>Mot de passe</label>
         </div>
-        <button onClick={login}>Se connecter</button>
+        <button className="btn-submit" onClick={login}>Se connecter</button>
+      </div>
     </div>
   );
 }

@@ -57,8 +57,10 @@ function Profile() {
     <div>
       <div className="informations">
         <h2>{pseudo}</h2>
+        <div className="buttons-profile">
         {authState.pseudo === pseudo && (
           <button
+           className="btn-submit"
             onClick={() => {
               history.push("/changepassword");
             }}
@@ -67,10 +69,11 @@ function Profile() {
           </button>
         )}
         {authState.pseudo === pseudo && (
-          <button onClick={deleteUser}>Supprimer le compte</button>
+          <button className="btn-submit" onClick={deleteUser}>Supprimer le compte</button>
         )}
+        </div>
+        
       </div>
-      <div className="listposts">Liste des posts</div>
     </div>
   );
 }

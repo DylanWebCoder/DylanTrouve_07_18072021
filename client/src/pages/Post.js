@@ -5,7 +5,8 @@ import { AuthContext } from "../helpers/AuthContext";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { GrAdd } from "react-icons/gr";
 import { RiDeleteBack2Fill } from "react-icons/ri";
-import swal from 'sweetalert';
+import { GrUpdate } from "react-icons/gr";
+import swal from "sweetalert";
 
 function Post() {
   let { id } = useParams();
@@ -67,25 +68,23 @@ function Post() {
   };
 
   const deletePost = (id) => {
-
     swal({
       title: "Êtes-vous sûr ?",
       text: "Vous allez supprimer définitivement ce post !",
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    })
-    .then((willDelete) => {
+    }).then((willDelete) => {
       if (willDelete) {
         axios
-      .delete(`http://localhost:5000/api/posts/${id}`, {
-        headers: {
-          accessToken: localStorage.getItem("accessToken"),
-        },
-      })
-      .then(() => {
-        history.push("/");
-      });
+          .delete(`http://localhost:5000/api/posts/${id}`, {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
+          })
+          .then(() => {
+            history.push("/");
+          });
         swal("Vous avez bien supprimer le post !", {
           icon: "success",
         });
@@ -93,8 +92,6 @@ function Post() {
         swal("Vous n'avez pas supprimer le post");
       }
     });
-    
-    
   };
 
   const editPost = (option) => {
@@ -126,40 +123,38 @@ function Post() {
     }
   };
 
-
-  if((!postObject || !postObject.User) && (!comments || !comments.User) ) 
-  return null;
+  if ((!postObject || !postObject.User) && (!comments || !comments.User))
+    return null;
 
   return (
-
     <div className="post">
       <div className="leftside">
         <div className="card-post">
-          <div
-            className="card-title"
-            onClick={() => {
-              if (authState.pseudo === postObject.User.pseudo) {
-                editPost("title");
-              }
-            }}
-          >
-            {postObject.title}
+          <div className="card-title">
+            <h3>{postObject.title}</h3>
+            <GrUpdate className="icon-update-title"
+              onClick={() => {
+                if (authState.pseudo === postObject.User.pseudo) {
+                  editPost("title");
+                }
+              }}
+            />
           </div>
 
           <div className="card-content">
-            <div
-              className="content"
-              onClick={() => {
-                if (authState.pseudo === postObject.User.pseudo) {
-                  editPost("content");
-                }
-              }}
-            >
-              {postObject.content}
+            <div className="content">
+              <p>{postObject.content}</p>
+              <GrUpdate className="icon-update-content"
+                onClick={() => {
+                  if (authState.pseudo === postObject.User.pseudo) {
+                    editPost("content");
+                  }
+                }}
+              />
             </div>
           </div>
           <div className="card-footer">
-          <div className="pseudo">
+            <div className="pseudo">
               <span>{postObject ? postObject.User.pseudo : ""}</span>
               {(authState.pseudo === postObject.User.pseudo ||
                 authState.isAdmin === true) && (
