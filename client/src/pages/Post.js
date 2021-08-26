@@ -43,7 +43,6 @@ function Post() {
         } else {
           const commentToAdd = {
             content: newComment,
-            pseudo: response.data.User.pseudo,
           };
           setComments([...comments, commentToAdd]);
           setNewComment("");

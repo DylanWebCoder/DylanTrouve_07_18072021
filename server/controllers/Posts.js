@@ -23,21 +23,19 @@ exports.getAllPosts = async (req, res) => {
 
 exports.getOnePost = async (req, res) => {
   const id = req.params.id;
-  /*const post = await Posts.findByPk(id);
-  res.json(post);*/
   Posts.findOne({ where: { id: id }, include: {model: Users, attributes: ["pseudo"]} })
     .then((post) => res.status(200).json(post))
     .catch((error) => res.status(404).json({ error }));
 };
 
-exports.getPostsByUser = async (req, res) => {
+/* exports.getPostsByUser = async (req, res) => {
   const id = req.params.id;
   const listOfPosts = await Posts.findAll({
     where: { UserId: id },
     include: [Likes],
   });
   res.json(listOfPosts);
-};
+}; */
 
 exports.deletePost = async (req, res) => {
   const postId = req.params.postId;

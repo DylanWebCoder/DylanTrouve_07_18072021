@@ -6,7 +6,7 @@ const {validateToken} = require('../middlewares/Auth')
 router.post("/", validateToken, postsCtrl.createPost);
 router.get("/", validateToken, postsCtrl.getAllPosts);
 router.get('/byId/:id', postsCtrl.getOnePost);
-router.get('/byuserId/:id', postsCtrl.getPostsByUser);
+// router.get('/byuserId/:id', postsCtrl.getPostsByUser);
 router.delete("/:postId", validateToken, postsCtrl.deletePost);
 router.put("/title", validateToken, postsCtrl.editPostTitle);
 router.put("/content", validateToken, postsCtrl.editPostContent);
