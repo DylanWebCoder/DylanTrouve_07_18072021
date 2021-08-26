@@ -8,21 +8,25 @@ function Profile() {
   let { id } = useParams();
   let history = useHistory();
   const [pseudo, setPseudo] = useState("");
-  const [listOfPosts, setListOfPosts] = useState([]);
+  // const [listOfPosts, setListOfPosts] = useState([]);
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/users/infos/${id}`)
+      .get(`http://localhost:5000/api/users/infos/${id}`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
       .then((response) => {
         setPseudo(response.data.pseudo);
       });
 
-    axios
+    /*axios
       .get(`http://localhost:5000/api/posts/byuserId/${id}`)
       .then((response) => {
         setListOfPosts(response.data);
-      });
+      }); */
   }, []);
 
   const deleteUser = () => {
@@ -58,21 +62,22 @@ function Profile() {
       <div className="informations">
         <h2>{pseudo}</h2>
         <div className="buttons-profile">
-        {authState.pseudo === pseudo && (
-          <button
-           className="btn-submit"
-            onClick={() => {
-              history.push("/changepassword");
-            }}
-          >
-            Changer le mdp
-          </button>
-        )}
-        {authState.pseudo === pseudo && (
-          <button className="btn-submit" onClick={deleteUser}>Supprimer le compte</button>
-        )}
+          {/*{authState.pseudo === pseudo && (
+            <button
+              className="btn-submit"
+              onClick={() => {
+                history.push("/changepassword");
+              }}
+            >
+              Changer le mdp
+            </button>
+            )}*/}
+          {authState.pseudo === pseudo && (
+            <button className="btn-submit" onClick={deleteUser}>
+              Supprimer le compte
+            </button>
+          )}
         </div>
-        
       </div>
     </div>
   );

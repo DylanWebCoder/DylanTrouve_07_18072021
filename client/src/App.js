@@ -1,21 +1,26 @@
 import "./App.css";
-import { useHistory, BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
+import {
+  useHistory,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
-import Profile from "./pages/Profile"
-import Logo from "./images/icon-color-line.png"
+import Profile from "./pages/Profile";
+import Logo from "./images/icon-color-line.png";
 // import ChangePassword from "./pages/ChangePassword";
 
-import {BiLogOutCircle} from 'react-icons/bi';
+import { BiLogOutCircle } from "react-icons/bi";
 
 import { AuthContext } from "./helpers/AuthContext";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 
 function App() {
   let history = useHistory();
@@ -24,7 +29,7 @@ function App() {
     pseudo: "",
     id: 0,
     status: false,
-    isAdmin: false
+    isAdmin: false,
   });
 
   useEffect(() => {
@@ -52,7 +57,7 @@ function App() {
       pseudo: "",
       id: 0,
       status: false,
-      isAdmin: false
+      isAdmin: false,
     });
   };
 
@@ -64,26 +69,36 @@ function App() {
             <div className="left">
               {!authState.status ? (
                 <>
-                  <Link className="link-navbar" to="/login">Connexion</Link>
-                  <Link className="link-navbar" to="/signup">S'inscrire</Link>
+                  <Link className="link-navbar" to="/login">
+                    Connexion
+                  </Link>
+                  <Link className="link-navbar" to="/signup">
+                    Inscription
+                  </Link>
                 </>
               ) : (
                 <>
-                  <Link className="link-navbar" to="/">Accueil</Link>
-                  <Link className="link-navbar" to="/createpost">Créer un post</Link>
+                  <Link className="link-navbar" to="/">
+                    Accueil
+                  </Link>
+                  <Link className="link-navbar" to="/createpost">
+                    Créer un post
+                  </Link>
                 </>
               )}
             </div>
             <div className="right">
-              <Link className="pseudo-login" to={`/profile/${authState.id}`} >{authState.pseudo}</Link>
-              {authState.status && (
-                <BiLogOutCircle onClick={logout} /> 
-              )}
+              <Link className="pseudo-login" to={`/profile/${authState.id}`}>
+                {authState.pseudo}
+              </Link>
+              {authState.status && <BiLogOutCircle onClick={logout} />}
             </div>
           </div>
           <div className="banner">
-        <img alt="Logo de l'entreprise" src={Logo} />
-      </div>
+            <h1>
+              <img alt="Logo de l'entreprise" src={Logo} />
+            </h1>
+          </div>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/createpost" exact component={CreatePost} />
@@ -91,7 +106,7 @@ function App() {
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={SignUp} />
             <Route path="/profile/:id" exact component={Profile} />
-            <Route path="/changepassword"/>
+            <Route path="/changepassword" />
             <Route path="*" exact component={NotFound} />
           </Switch>
         </Router>

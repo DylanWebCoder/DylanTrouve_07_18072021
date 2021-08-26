@@ -2,8 +2,10 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import {useHistory} from "react-router-dom"
 
 function SignUp() {
+  let history = useHistory();
   const initialValues = {
     pseudo: "",
     password: "",
@@ -15,9 +17,10 @@ function SignUp() {
   });
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:5000/api/users/signup", data).then(() => {
-      console.log(data);
-    });
+    axios.post("http://localhost:5000/api/users/signup", data).then((response) => {
+      if(response.status === 201){
+        history.push("/login");
+      }    });
   };
 
   return (
@@ -28,24 +31,26 @@ function SignUp() {
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form>
-          <div className="group">
+        <Form className="signup-container">
+          <div className="pseudo-container">
+            <label>Pseudo</label>
             <Field name="pseudo" placeholder="Entrer un pseudo" />
-            <label>Pseudo : </label>
             <ErrorMessage name="pseudo" component="span" />
           </div>
 
-          <div className="group">
+          <div className="password-container">
+            <label>Mot de passe</label>
             <Field
               type="password"
               name="password"
               placeholder="Entrer un mot de passe"
             />
-            <label>Mot de passe : </label>
             <ErrorMessage name="password" component="span" />
           </div>
 
-          <button className="btn-submit" type="submit">S'inscrire</button>
+          <button className="btn-submit" type="submit">
+            S'inscrire
+          </button>
         </Form>
       </Formik>
     </div>

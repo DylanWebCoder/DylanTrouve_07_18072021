@@ -10,7 +10,7 @@ exports.createComment = async (req, res) => {
     PostId: postId,
     content: req.body.content
   })
-  .then(() => res.status(201).json({ message: "Commentaire ajouté !" }))
+  .then((comment) => res.status(201).json(comment.id))
     .catch((error) => res.status(400).json({ error }));
 };
 
@@ -20,6 +20,7 @@ exports.getAllComments = async (req, res) => {
   const comments = await Comments.findAll({ where: { PostId: postId }, include: {model : Users, attributes: ["pseudo"]} });
   res.json(comments);
 };
+
 
 exports.deleteComment = async (req, res) => {
   const commentId = req.params.commentId;

@@ -17,11 +17,19 @@ function Post() {
   let history = useHistory();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/posts/byId/${id}`).then((response) => {
+    axios.get(`http://localhost:5000/api/posts/byId/${id}`, {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response) => {
       setPostObject(response.data);
     });
 
-    axios.get(`http://localhost:5000/api/comments/${id}`).then((response) => {
+    axios.get(`http://localhost:5000/api/comments/${id}`, {
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response) => {
       setComments(response.data);
     });
   }, []);
@@ -42,28 +50,47 @@ function Post() {
           console.log(response.data.error);
         } else {
           const commentToAdd = {
+            id: comments.id,
             content: newComment,
+            User: { pseudo: authState.pseudo },
           };
           setComments([...comments, commentToAdd]);
           setNewComment("");
         }
+        window.location.reload()
+        //swal("Commentaire ajouté !", "", "success");
       });
   };
 
   const deleteComment = (id) => {
-    axios
-      .delete(`http://localhost:5000/api/comments/${id}`, {
-        headers: {
-          accessToken: localStorage.getItem("accessToken"),
-        },
-      })
-      .then(() => {
-        setComments(
-          comments.filter((val) => {
-            return val.id != id;
+    swal({
+      title: "Êtes-vous sûr ?",
+      text: "Vous allez supprimer définitivement ce commentaire !",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .delete(`http://localhost:5000/api/comments/${id}`, {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
           })
-        );
-      });
+          .then(() => {
+            setComments(
+              comments.filter((val) => {
+                return val.id != id;
+              })
+            );
+          });
+        swal("Vous avez bien supprimer le commentaire !", {
+          icon: "success",
+        });
+      } else {
+        swal("Vous n'avez pas supprimez le commentaire !");
+      }
+    });
   };
 
   const deletePost = (id) => {
@@ -131,7 +158,8 @@ function Post() {
         <div className="card-post">
           <div className="card-title">
             <h3>{postObject.title}</h3>
-            <GrUpdate className="icon-update-title"
+            <GrUpdate
+              className="icon-update-title"
               onClick={() => {
                 if (authState.pseudo === postObject.User.pseudo) {
                   editPost("title");
@@ -143,7 +171,8 @@ function Post() {
           <div className="card-content">
             <div className="content">
               <p>{postObject.content}</p>
-              <GrUpdate className="icon-update-content"
+              <GrUpdate
+                className="icon-update-content"
                 onClick={() => {
                   if (authState.pseudo === postObject.User.pseudo) {
                     editPost("content");

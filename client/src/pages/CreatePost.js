@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../helpers/AuthContext";
+import swal from "sweetalert";
 
 function CreatePost() {
   const { authState } = useContext(AuthContext);
@@ -23,7 +24,7 @@ function CreatePost() {
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Vous devez mettre un titre"),
-    content: Yup.string().required(),
+    content: Yup.string().required("Vous devez mettre un contenu"),
   });
 
   const onSubmit = (data) => {
@@ -32,18 +33,20 @@ function CreatePost() {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then((reponse) => {
+        swal("Vous venez de créer un post !")
         history.push("/");
       });
   };
 
   return (
     <div className="createpost">
+      <h2>Créer un post</h2>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form>
+        <Form className="createpost-container" >
           <label>Titre : </label>
           <ErrorMessage name="title" component="span" />
           <Field id="" name="title" placeholder="Titre du post" />

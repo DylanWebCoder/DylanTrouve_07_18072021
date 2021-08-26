@@ -52,10 +52,9 @@ exports.getInfos = async (req, res) => {
   res.json(infos);
 };
 
-exports.changePassword = async (req, res) => {
+/* exports.changePassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body;
   const user = await Users.findOne({ where: { pseudo: req.user.pseudo } });
-
   bcrypt.compare(oldPassword, user.password).then(async (match) => {
     if (!match) res.json({ error: "Les mots de passe ne correspondent pas" });
     bcrypt.hash(newPassword, 10).then((hash) => {
@@ -63,7 +62,7 @@ exports.changePassword = async (req, res) => {
       res.json("Mot de passe modifié !");
     });
   });
-};
+}; */
 
 exports.delete = async (req, res) => {
   const id = req.params.id;

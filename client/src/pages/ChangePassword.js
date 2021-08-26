@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { response } from "express";
 
 function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
