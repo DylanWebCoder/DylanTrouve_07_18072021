@@ -12,7 +12,6 @@ exports.createPost = (req, res) => {
   })
     .then(() => res.status(201).json({ message: "Le post a été créer" }))
     .catch((error) => res.status(400).json({ error }));
-  console.log(userId);
 };
 
 exports.getAllPosts = async (req, res) => {

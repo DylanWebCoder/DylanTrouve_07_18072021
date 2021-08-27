@@ -9,7 +9,7 @@ function Profile() {
   let history = useHistory();
   const [pseudo, setPseudo] = useState("");
   // const [listOfPosts, setListOfPosts] = useState([]);
-  const { authState } = useContext(AuthContext);
+  const { authState, setAuthState } = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -47,6 +47,12 @@ function Profile() {
           .then(() => {
             localStorage.removeItem("accessToken");
             history.push("/login");
+            setAuthState({
+              pseudo: "",
+              id: 0,
+              status: false,
+              isAdmin: false,
+            });
           });
         swal("Votre compte a bien été supprimer !", {
           icon: "success",

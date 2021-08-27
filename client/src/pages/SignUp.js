@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import {useHistory} from "react-router-dom"
+import swal from "sweetalert";
 
 function SignUp() {
   let history = useHistory();
@@ -20,6 +21,7 @@ function SignUp() {
     axios.post("http://localhost:5000/api/users/signup", data).then((response) => {
       if(response.status === 201){
         history.push("/login");
+        swal("Bravo!", "Vous avez bien créer votre compte !", "success");
       }    });
   };
 
@@ -34,7 +36,7 @@ function SignUp() {
         <Form className="signup-container">
           <div className="pseudo-container">
             <label>Pseudo</label>
-            <Field name="pseudo" placeholder="Entrer un pseudo" />
+            <Field name="pseudo" placeholder="Entrez un pseudo" />
             <ErrorMessage name="pseudo" component="span" />
           </div>
 
@@ -43,7 +45,7 @@ function SignUp() {
             <Field
               type="password"
               name="password"
-              placeholder="Entrer un mot de passe"
+              placeholder="Entrez un mot de passe"
             />
             <ErrorMessage name="password" component="span" />
           </div>

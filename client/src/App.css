@@ -53,12 +53,6 @@ $color2 : #ffd7d7; */
   width : 50%;
 }
 
-@media screen and (min-width: 550px){ 
-  .banner img{
-    width: 266.5px;
-  }
-  
-}
 /* -------------------------------------- NAVBAR -------------------------------------- */
 .navbar{
   width: 100%;
@@ -101,7 +95,7 @@ $color2 : #ffd7d7; */
 .home .card-post{
   display: flex;
   flex-direction: column;
-  width: 330px;
+  width: 95%;
   height: 300px;
   margin: 20px 0;
   border-radius: 30px;
@@ -253,19 +247,27 @@ margin-bottom: 30px;
   align-items: center;
 }
 
+
+
 .post .leftside{
   background-color: #ffd7d7;
   margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .post .leftside .card-post{
   display: flex;
   flex-direction: column;
-  width: 330px;
+  width: 95%;
   height: 300px;
   margin: 20px;
   border-radius: 30px;
 }
+
 
 .post .leftside .card-post .card-title{
   position: relative;
@@ -330,9 +332,15 @@ margin-bottom: 30px;
 /* -------------------------------------- Comment -------------------------------------- */
 .post .rightside{
   background-color: #ffd7d7;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .rightside .addcomment{
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -345,6 +353,7 @@ margin-bottom: 30px;
 .addcomment input{
   height: 70%;
   width: 70%;
+  padding-left: 10px;
 }
 
 .rightside .listofcomments{
@@ -352,7 +361,6 @@ margin-bottom: 30px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
 }
 
 .listofcomments .comment-container{
@@ -400,3 +408,27 @@ margin-bottom: 30px;
 
 
 /* -------------------------------------- NotFound -------------------------------------- */
+
+
+/* -- RESPONSIVE -- */
+
+@media screen and (min-width: 550px){ 
+  .banner img{
+    width: 266.5px;
+  }
+  
+}
+@media screen and (min-width: 600px){
+  .post .leftside .card-post,.home .card-post{
+    width: 560px;
+  }
+}
+@media screen and (min-width: 1000px){
+  .post .leftside, .post .rightside{
+    background-color: #fff;
+  }
+  .post .leftside .card-post, .rightside .addcomment, .listofcomments .comment-container{
+    border: solid 3px #ffd7d7;
+  }
+
+}

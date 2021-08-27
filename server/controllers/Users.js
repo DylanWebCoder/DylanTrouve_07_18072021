@@ -71,9 +71,5 @@ exports.delete = async (req, res) => {
     await Users.destroy({ where: { id: userId } })
       .then(() => res.status(200).json({ message: "Utilisateur supprrimé" }))
       .catch((error) => res.status(400).json({ error }));
-  } else {
-    console.log("NO");
-    console.log(id);
-    console.log(userId);
   }
 };

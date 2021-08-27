@@ -72,9 +72,6 @@ function Home() {
         }
       });
   };
-
-  console.log(authState);
-
   return (
     <div className="home">
       {listOfPosts.map((value, key) => {

@@ -88,7 +88,7 @@ function Post() {
           icon: "success",
         });
       } else {
-        swal("Vous n'avez pas supprimez le commentaire !");
+        swal("Vous n'avez pas supprimer le commentaire !");
       }
     });
   };
@@ -198,18 +198,7 @@ function Post() {
       </div>
 
       <div className="rightside">
-        <div className="addcomment">
-          <input
-            type="text"
-            placeholder="Entrer un commentaire..."
-            value={newComment}
-            autoComplete="off"
-            onChange={(event) => {
-              setNewComment(event.target.value);
-            }}
-          />
-          <GrAdd onClick={addComment} />
-        </div>
+        
         <div className="listofcomments">
           {comments.map((comment, key) => {
             return (
@@ -227,6 +216,18 @@ function Post() {
               </div>
             );
           })}
+        </div>
+        <div className="addcomment">
+          <input
+            type="text"
+            placeholder="Entrer un commentaire..."
+            value={newComment}
+            autoComplete="off"
+            onChange={(event) => {
+              setNewComment(event.target.value);
+            }}
+          />
+          <GrAdd onClick={addComment} />
         </div>
       </div>
     </div>
