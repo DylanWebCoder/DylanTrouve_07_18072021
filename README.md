@@ -9,7 +9,7 @@ Pour installer toutes les dépendances, il faut se placer dans chaque dossier se
   
 Pour lancer l'application : "npm start" dans chaque dossier.  
 
-Pour le front-end : Utilisation de React
+Pour le front-end : Utilisation de React  
 Pour le back-end : Utilisation de Node.js (avec express) et MySql (avec Sequelize)
 
 L'application a plusieurs fonctionnalités : 
