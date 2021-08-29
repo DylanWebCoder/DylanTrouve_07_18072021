@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
       { pseudo: user.pseudo, id: user.id, isAdmin: user.is_admin },
       process.env.SECRET_TOKEN
     );
-    res.json({ token: accessToken, pseudo: pseudo, id: user.id });
+    res.json({ token: accessToken, pseudo: pseudo, id: user.id, isAdmin: user.is_admin });
   });
 };
 
